@@ -10,7 +10,7 @@ IPCapture cam;
 
 void setup() {
   size(640,480);
-  cam = new IPCapture(this, "http://212.219.113.227/axis-cgi/mjpg/video.cgi", "", "");
+  cam = new IPCapture(this, "http://195.235.198.107:3346/axis-cgi/mjpg/video.cgi?resolution=320x240", "", "");
   cam.start();
   
   // this works as well:

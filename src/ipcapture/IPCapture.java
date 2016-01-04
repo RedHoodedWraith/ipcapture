@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import processing.core.*;
 
 public class IPCapture extends PImage implements Runnable {
-  private PApplet parent;
   private String urlString, user, pass;
   private byte[] curFrame;
   private boolean frameStarted;
@@ -22,14 +21,14 @@ public class IPCapture extends PImage implements Runnable {
   private ByteArrayOutputStream jpgOut;
   private volatile boolean keepAlive;
   
-  public final static String VERSION = "0.2.1";
+  public final static String VERSION = "0.3.1";
   
   public IPCapture(PApplet parent) {
     this(parent, "", "", "");
   }
 
   public IPCapture(PApplet parent, String urlString, String user, String pass) {
-    super();
+    super(parent.width, parent.height, ARGB);
     this.parent = parent;
     parent.registerMethod("dispose", this);
     this.urlString = urlString;
@@ -165,15 +164,15 @@ public class IPCapture extends PImage implements Runnable {
     }
     int w = bufImg.getWidth();
     int h = bufImg.getHeight();
-    if (w != this.width || h != this.height) {
-      System.out.println("New frame size: " + w + "x" + h);
-      this.width = w;
-      this.height = h;
-      this.pixels = new int[w*h];
+    if (w > 0 && h > 0) {
+      if (w != this.width || h != this.height) {
+        System.out.println("New frame size: " + w + "x" + h);
+        this.resize(w, h);
+      }
+      bufImg.getRGB(0, 0, w, h, this.pixels, 0, w);
+      //bufImg.getPixels(this.pixels, 0, w, 0, 0, w, h);
+      this.updatePixels();
     }
-    bufImg.getRGB(0, 0, w, h, this.pixels, 0, w);
-    //bufImg.getPixels(this.pixels, 0, w, 0, 0, w, h);
-    this.updatePixels();
     frameAvailable = false;
   }
 }
