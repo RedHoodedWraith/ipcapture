@@ -1,10 +1,11 @@
-/* IPCapture sample sketch for Android            *
+/* IPCapture sample sketch for Java and Android   *
  *                                                *
  * === IMPORTANT ===                              *
- * Remember to enable INTERNET permissions in the *
+ * In Android mode, Remember to enable            *
+ * INTERNET permissions in the                    *
  * Android -> Sketch permissions menu             */
 
-import ipcapture.android.*;
+import ipcapture.*;
 
 IPCapture cam;
 

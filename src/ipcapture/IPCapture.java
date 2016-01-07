@@ -1,13 +1,7 @@
 package ipcapture;
 
-import ipcapture.Base64Encoder;
-
 import java.net.*;
 import java.io.*;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-//import android.graphics.BitmapFactory;
-//import android.graphics.Bitmap;
 import processing.core.*;
 
 public class IPCapture extends PImage implements Runnable {
@@ -28,7 +22,7 @@ public class IPCapture extends PImage implements Runnable {
   }
 
   public IPCapture(PApplet parent, String urlString, String user, String pass) {
-    super(parent.width, parent.height, ARGB);
+    super(parent.width, parent.height, RGB);
     this.parent = parent;
     parent.registerMethod("dispose", this);
     this.urlString = urlString;
@@ -148,31 +142,27 @@ public class IPCapture extends PImage implements Runnable {
   }
   
   public void read() {
-    ByteArrayInputStream jpgIn;
-    BufferedImage bufImg;
-    //Bitmap bufImg;
+    ByteArrayInputStream jpgIn = new ByteArrayInputStream(curFrame);
+    FrameBuffer buffer;
+    if (isAndroid()) buffer = new AndroidFrameBuffer(jpgIn);
+    else buffer = new JavaFrameBuffer(jpgIn);
+    buffer.toPImage(this);
+    frameAvailable = false;
     try {
-      jpgIn = new ByteArrayInputStream(curFrame);
-      bufImg = ImageIO.read(jpgIn);
-      //bufImg = BitmapFactory.decodeStream(jpgIn);
       jpgIn.close();
     }
     catch (IOException e) {
-      System.err.println("Error acquiring the frame: " + e.getMessage());
-      frameAvailable = false;
-      return;
+      System.out.println("Error closing the MJPEG input stream: " + e.getMessage());
     }
-    int w = bufImg.getWidth();
-    int h = bufImg.getHeight();
-    if (w > 0 && h > 0) {
-      if (w != this.width || h != this.height) {
-        System.out.println("New frame size: " + w + "x" + h);
-        this.resize(w, h);
-      }
-      bufImg.getRGB(0, 0, w, h, this.pixels, 0, w);
-      //bufImg.getPixels(this.pixels, 0, w, 0, 0, w, h);
-      this.updatePixels();
+  }
+  
+  private boolean isAndroid() {
+    try {
+      Class.forName("android.graphics.Bitmap");
+      return true;
     }
-    frameAvailable = false;
+    catch (ClassNotFoundException e) {
+      return false;
+    }
   }
 }
