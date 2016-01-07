@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/core.jar"/>
-	<classpathentry kind="lib" path="/Users/stefanobaldan/Documents/Processing/modes/AndroidMode/sdk/platforms/android-5.1.1/android.jar"/>
+	<classpathentry kind="src" output="bin" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/stefanobaldan/android-sdk-macosx/platforms/android-15/android.jar"/>
+	<classpathentry kind="lib" path="/Applications/Processing.app/Contents/Java/core/library/core.jar"/>
 	<classpathentry kind="lib" path="/Users/stefanobaldan/Documents/Processing/modes/AndroidMode/android-core.jar"/>
-	<classpathentry kind="output" path="classes"/>
+	<classpathentry kind="output" path="resources/code"/>
 </classpath>
