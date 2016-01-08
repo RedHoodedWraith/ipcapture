@@ -15,7 +15,7 @@ public class IPCapture extends PImage implements Runnable {
   private ByteArrayOutputStream jpgOut;
   private volatile boolean keepAlive;
   
-  public final static String VERSION = "0.3.1";
+  public final static String VERSION = "0.4.1";
   
   public IPCapture(PApplet parent) {
     this(parent, "", "", "");

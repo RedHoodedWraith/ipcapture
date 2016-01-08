@@ -8,10 +8,15 @@ public class AndroidFrameBuffer extends FrameBuffer {
   Bitmap buffer;
   
   public AndroidFrameBuffer(ByteArrayInputStream in) {
-	this.buffer = BitmapFactory.decodeStream(in);
+	try {
+	  this.buffer = BitmapFactory.decodeStream(in);
+	}
+	catch (Exception e) {
+	  this.buffer = null;
+	}
   }
   
-  public boolean isAvailable() {
+  public boolean isValid() {
 	return buffer != null;
   }
   

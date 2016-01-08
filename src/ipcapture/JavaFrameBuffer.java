@@ -12,12 +12,12 @@ public class JavaFrameBuffer extends FrameBuffer {
 	try {
 	  this.buffer = ImageIO.read(in);
 	}
-	catch (IOException e) {
+	catch (Exception e) {
 	  buffer = null;
 	}
   }
   
-  public boolean isAvailable() {
+  public boolean isValid() {
 	return buffer != null;
   }
   
