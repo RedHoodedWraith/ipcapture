@@ -3,9 +3,10 @@ package ipcapture;
 import java.net.*;
 import java.io.*;
 import processing.core.*;
+import ipcapture.IPAuthenticator;
 
 public class IPCapture extends PImage implements Runnable {
-  private String urlString, user, pass;
+  private String urlString;
   private byte[] curFrame;
   private boolean frameStarted;
   private boolean frameAvailable;
@@ -15,7 +16,7 @@ public class IPCapture extends PImage implements Runnable {
   private ByteArrayOutputStream jpgOut;
   private volatile boolean keepAlive;
   
-  public final static String VERSION = "0.4.1";
+  public final static String VERSION = "0.4.2";
   
   public IPCapture(PApplet parent) {
     this(parent, "", "", "");
@@ -26,8 +27,7 @@ public class IPCapture extends PImage implements Runnable {
     this.parent = parent;
     parent.registerMethod("dispose", this);
     this.urlString = urlString;
-    this.user = user;
-    this.pass = pass;
+    Authenticator.setDefault(new IPAuthenticator(user, pass));
     this.curFrame = new byte[0];
     this.frameStarted = false;
     this.frameAvailable = false;
@@ -54,8 +54,7 @@ public class IPCapture extends PImage implements Runnable {
   
   public void start(String urlString, String user, String pass) {
     this.urlString = urlString;
-    this.user = user;
-    this.pass = pass;
+    Authenticator.setDefault(new IPAuthenticator(user, pass));
     this.start();
   }
 
@@ -91,7 +90,7 @@ public class IPCapture extends PImage implements Runnable {
     
     try {
       conn = (HttpURLConnection)url.openConnection();
-      conn.setRequestProperty("Authorization", "Basic " + base64.encode(user + ":" + pass));
+      //conn.setRequestProperty("Authorization", "Basic " + base64.encode(user + ":" + pass));
     }
     catch (IOException e) {
       System.err.println("Unable to connect: " + e.getMessage());
