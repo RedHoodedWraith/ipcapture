@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tmp/IPCapture/IPCapture.iml" filepath="$PROJECT_DIR$/tmp/IPCapture/IPCapture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ipcapture.iml" filepath="$PROJECT_DIR$/ipcapture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resources/resources.iml" filepath="$PROJECT_DIR$/resources/resources.iml" />
+    </modules>
+  </component>
+</project>
