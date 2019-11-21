@@ -16,7 +16,7 @@ public class IPCapture extends PImage implements Runnable {
   private ByteArrayOutputStream jpgOut;
   private volatile boolean keepAlive;
   
-  public final static String VERSION = "0.4.2";
+  public final static String VERSION = "0.4.3";
   
   public IPCapture(PApplet parent) {
     this(parent, "", "", "");
@@ -32,6 +32,7 @@ public class IPCapture extends PImage implements Runnable {
     this.frameStarted = false;
     this.frameAvailable = false;
     this.keepAlive = false;
+    System.out.println("Running the updated version by Rowan Rathod.\nImageIO Cache is off");
   }
   
   public boolean isAlive() {
@@ -130,13 +131,13 @@ public class IPCapture extends PImage implements Runnable {
     catch (IOException e) {
       System.err.println("I/O Error: " + e.getMessage());
     }
-    try {
+    /*try {
       jpgOut.close();
       httpIn.close();
     }
     catch (IOException e) {
       System.err.println("Error closing I/O streams: " + e.getMessage());
-    }
+    }*/
     conn.disconnect();
   }
   

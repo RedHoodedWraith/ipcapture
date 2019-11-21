@@ -10,7 +10,8 @@ public class JavaFrameBuffer extends FrameBuffer {
   
   public JavaFrameBuffer(ByteArrayInputStream in) {
 	try {
-	  this.buffer = ImageIO.read(in);
+	    ImageIO.setUseCache(false);
+	    this.buffer = ImageIO.read(in);
 	}
 	catch (Exception e) {
 	  buffer = null;

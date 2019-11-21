@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="ant-contrib-1.0b3">
+  <library name="core">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/resources/code/ant-contrib-1.0b3.jar!/" />
+      <root url="jar:///opt/processing-3.5.3/core/library/core.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
